@@ -12,6 +12,16 @@ As a user, I want to:
 - save my newly created playlists to my spotify account
 - view others' playlists and upvote/downvote
 
+## APIs Used
+
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
+
+## Rough task breakdown
+
+- API queries and Spotify integration -> Zach
+- Database and sequelize -> Megan & Pablo
+- Views and frontend JS -> Nick
+
 ## Wireframe
 
 ### Homepage
@@ -29,9 +39,3 @@ As a user, I want to:
 ### View Existing Playlists
 
 ![existing playlists](public/img/latestplaylists.png)
-
-## APIs Used
-
-- [Spotify Web API](https://developer.spotify.com/documentation/web-api/)
-
-## Rough task breakdown
