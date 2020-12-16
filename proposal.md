@@ -16,19 +16,19 @@ As a user, I want to:
 
 ### Homepage
 
-![home](img/homepage.png)
+![home](public/img/homepage.png)
 
 ### Login
 
-![login page](img/login.png)
+![login page](public/img/login.png)
 
 ### Create New Playlist
 
-![create playlist form](img/newplaylist.png)
+![create playlist form](public/img/newplaylist.png)
 
 ### View Existing Playlists
 
-![existing playlists](img/latestplaylists.png)
+![existing playlists](public/img/latestplaylists.png)
 
 ## APIs Used
 
