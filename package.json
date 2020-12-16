@@ -1,7 +1,7 @@
 {
   "name": "song-book",
   "version": "1.0.0",
-  "description": "",
+  "description": "* [Description](#description)\r * [User Story](#user-story)\r * [Collaborators](#collaborators)\r * [Technologies](#technologies)\r * [SetUp](#set-up)\r * [Conclusion](#conclusion)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
