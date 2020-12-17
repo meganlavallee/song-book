@@ -35,11 +35,12 @@ route.listen(8080, () => {
 
 module.exports = (sequelize, DataTypes) => {
     const ModelName = sequelize.define("table name", (
-      songName:(
-        type: DateDataType.STRING,
-        allowNull: false,
-        validate:(
-            notEmpty: true,
-      ),  
-    )),
+      songName:{
+          type: DateDataType.STRING,
+          allowNull: false,
+          validate:(
+              notEmpty: true,
+        ),  
+          
+      },
 }

@@ -6,6 +6,6 @@ CREATE TABLE'song';(
     comment 'name',
     created_song DATETIME COMMENT 'created',
     updated_time DATETIME COMMENT 'updated',
-    score varchar(360) comment 'scores',
+    score INT(360) comment 'scores',
     [column] varchar (100) comment 'column'
 ) default charset utf8 comment 'running through';
