@@ -28,8 +28,8 @@ app.get('/callback', (req, res) => res.render('new'));
 
 ////////////////////////////////////////////////////////////////////
 // SPOTIFY API
-const client_id = '';
-const client_secret = '';
+const client_id = '42f8eb8e9e1c44fd9bac8098675676da';
+const client_secret = '690c3c6879944badb2f97b1cb09f0f7e';
 const redirect_uri =
   process.env.REDIRECT_URI || 'http://localhost:5070/callback';
 const credentials = {
@@ -49,3 +49,14 @@ app.listen(PORT, () =>
     `Listening on http://localhost:${PORT}. Go to /login to initiate authentication flow.`
   )
 );
+
+// playlist create method
+// app.get('/create', (req, res) => {
+//   spotifyApi
+//     .createPlaylist('Testing 2', { 'description': 'This is also a test', 'public': true })
+//     .then(function (data) {
+//       console.log('Created playlist!');
+//     }, function (err) {
+//       console.log('Something went wrong!', err);
+//     });
+// })
