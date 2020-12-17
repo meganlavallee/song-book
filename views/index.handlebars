@@ -1,0 +1,32 @@
+{{!-- <section class="hero is-success is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Fullheight title
+      </h1>
+      <h2 class="subtitle">
+        Fullheight subtitle
+      </h2>
+    </div>
+  </div>
+</section> --}}
+<script>
+
+  //$(document).ready(function () {
+    //$("div").hide().fadeIn(2000);
+  //});
+</script>
+<div>
+
+  <header>
+    <h1>SongBook</h1>
+  </header>
+  <main>
+    <p>An easy-to-use webapp to discover new music.<br>Create your own playlist or view others'.</p>
+    <button id="create-btn">Create</button> <button id="view-btn">View</button>
+  </main>
+</div>
+
+<script>
+  document.getElementById("create-btn").onclick = () => window.location.href = '/login';
+</script>
