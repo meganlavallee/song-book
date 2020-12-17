@@ -24,7 +24,7 @@ app.set('view engine', 'handlebars');
 ////////////////////////////////////////////////////////////////////
 // HTML ROUTES
 app.get('/', (req, res) => res.render('index'));
-app.get('/callback', (req, res) => res.render('new'));
+app.get('/callback', (req, res) => setToken(req, res));
 
 ////////////////////////////////////////////////////////////////////
 // SPOTIFY API
@@ -43,6 +43,22 @@ const spotifyApi = new SpotifyWebApi(credentials);
 const authorizeURL = spotifyApi.createAuthorizeURL(scopes);
 console.log(authorizeURL);
 app.get('/login', (req, res) => res.redirect(authorizeURL));
+
+const setToken = async (req, res) => {
+  try {
+    const { body } = await spotifyApi.authorizationCodeGrant(req.query.code);
+    spotifyApi.setAccessToken(body.access_token);
+    res.render('new');
+    getArtistId('Elvis');
+  } catch (err) {
+    console.log('\noopsie!\n\n' + err);
+  }
+};
+
+const getArtistId = async name => {
+  const data = await spotifyApi.searchArtists(name);
+  console.log(data.body.artists.items.map(i => `${i.name} -- ${i.id}`));
+};
 
 app.listen(PORT, () =>
   console.log(
