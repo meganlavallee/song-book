@@ -85,7 +85,7 @@ router.post('/api/playlists', async (req, res) => {
   } = await getRelated(id);
   // console.log(artists);
   const idArr = await artists.map(i => i.id);
-  const newArr = [id, ...idArr.slice(0, 1)];
+  const newArr = [id, ...idArr.slice(0, 4)];
   console.log(newArr);
   const { body } = await getRecs(newArr);
   // const tracksArr = data.body.tracks;
