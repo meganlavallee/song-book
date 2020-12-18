@@ -86,6 +86,27 @@ const getArtistByAlbum = async albumId => {
   }
 };
 
+const generatePlaylistContainer = async (title, description) => {
+  try {
+    spotifyApi.createPlaylist(title, { 'description': description, 'public': true })
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//STILL NOT FUNCTIONAL
+// const renderPlaylist = async (userName) => {
+//   spotifyApi.getUserPlaylists(userName)
+//     .then(function (data) {
+//       console.log('Retrieved playlists', data.body);
+//       // let readData = JSON.stringify(data);
+
+//     }, function (err) {
+//       console.log('Something went wrong!', err);
+//     });
+// }
+
 ////////////////////////////////////////////////////////////////////
 // API ROUTES
 router.get('/api/playlists/:name', async (req, res) => {
