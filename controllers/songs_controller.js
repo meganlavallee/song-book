@@ -31,23 +31,49 @@ const setToken = async (req, res) => {
     spotifyApi.setRefreshToken(body.refresh_token);
     res.render('new');
   } catch (err) {
-    console.log('\noopsie!\n\n' + err);
+    console.log('\noopsie! #1\n\n', err);
   }
 };
 
 const getArtistId = async name => {
-  const data = await spotifyApi.searchArtists(name);
-  return data.body.artists.items[0].id;
+  try {
+    const data = await spotifyApi.searchArtists(name);
+    return data.body.artists.items[0].id;
+  } catch (err) {
+    console.log('\noopsie! #2\n\n', err);
+  }
 };
 
-const getReccs = async artistId => {
-  const data = await spotifyApi.getRecommendations({
-    min_energy: 0.7,
-    min_danceability: 0.7,
-    seed_artists: [artistId],
-    min_popularity: 50,
-  });
-  return data;
+const getRecs = async artistIds => {
+  try {
+    const data = await spotifyApi.getRecommendations({
+      min_energy: 0.4,
+      min_danceability: 0.4,
+      seed_artists: artistIds,
+      min_popularity: 50,
+    });
+    return data;
+  } catch (err) {
+    console.log('\noopsie! #3\n\n', err);
+  }
+};
+
+const getArtistName = async id => {
+  try {
+    const data = await spotifyApi.getArtist(id);
+    return data;
+  } catch (err) {
+    console.log('\noopsie! #4\n\n', err);
+  }
+};
+
+const getRelated = async id => {
+  try {
+    const data = await spotifyApi.getArtistRelatedArtists(id);
+    return data;
+  } catch (err) {
+    console.log('\noopsie! #5\n\n', err);
+  }
 };
 
 ////////////////////////////////////////////////////////////////////
@@ -55,9 +81,15 @@ const getReccs = async artistId => {
 router.post('/api/playlists', async (req, res) => {
   const id = await getArtistId(req.body.name);
   const {
-    body: { tracks },
-  } = await getReccs(id);
-  console.log(tracks.map(track => track.name));
+    body: { artists },
+  } = await getRelated(id);
+  // console.log(artists);
+  const idArr = await artists.map(i => i.id);
+  const newArr = [id, ...idArr.slice(0, 1)];
+  console.log(newArr);
+  const { body } = await getRecs(newArr);
+  // const tracksArr = data.body.tracks;
+  console.log(body.tracks.map(i => i.name));
 });
 
 module.exports = router;
