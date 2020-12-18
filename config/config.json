@@ -2,24 +2,25 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "database_development",
+    "database": "song",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "port": 5070,
+    "dialect": "sequelize"
   },
-  "production": {},
-  "mysql": {
-    "host": "^2.18.1"
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "port": 5070,
+    "dialect": "sequelize"
   },
-  "express": {
-    "host": "^4.17.1"
-  },
-  "express-handlebars": {
-    "host": "^5.2.0"
-  },
-  "sequelize": {
-    "host": "^6.3.5"
-  },
-  "sequelize-cli": {
-    "host": "^6.2.0"
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "port": 5070,
+    "dialect": "sequelize"
   }
 }
