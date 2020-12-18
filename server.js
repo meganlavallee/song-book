@@ -51,7 +51,6 @@ const setToken = async (req, res) => {
     spotifyApi.setRefreshToken(body.refresh_token);
     res.render('new');
     getArtistId('Elvis');
-    generatePlaylistContainer('Testing 2', 'This is another test');
   } catch (err) {
     console.log('\noopsie!\n\n' + err);
   }
@@ -62,13 +61,7 @@ const getArtistId = async name => {
   console.log(data.body.artists.items.map(i => `${i.name} -- ${i.id}`));
 };
 
-const generatePlaylistContainer = async (title, description) => {
-  try {
-    spotifyApi.createPlaylist(title, { 'description': description, 'public': true })
-  } catch (err) {
-    console.error(err);
-  }
-}
+
 
 app.listen(PORT, () =>
   console.log(
@@ -89,3 +82,12 @@ app.listen(PORT, () =>
 //       console.log('Something went wrong!', err);
 //     });
 // }
+
+generatePlaylistContainer('Testing 2', 'This is another test');
+const generatePlaylistContainer = async (title, description) => {
+  try {
+    spotifyApi.createPlaylist(title, { 'description': description, 'public': true })
+  } catch (err) {
+    console.error(err);
+  }
+}
