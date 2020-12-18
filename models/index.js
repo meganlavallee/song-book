@@ -1,7 +1,7 @@
 "use strict";
 
 const path = require("path");
-const Sequelize = require("sequelize");
+const sequelize = require("sequelize");
 const basename = path.basename(module.filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
@@ -23,13 +23,13 @@ route.listen(5070, () => {
 
 const song = {
   selectAll(cb) {
-    orm.selectAll('song', res => cb(res));
+    sequelize.selectAll('song', res => cb(res));
   },
   insertOne(value, cb) {
-    orm.insertOne('song', 'placeholder', res => cb(res), value);
+    sequelize.insertOne('song', 'placeholder', res => cb(res), value);
   },
   updateOne(id, value, cb) {
-    orm.updateOne('song', 'placeholder', value, 'id', id, res => cb(res));
+    sequelize.updateOne('song', 'placeholder', value, 'id', id, res => cb(res));
   },
 };
 
