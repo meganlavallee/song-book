@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "song",
+    "host": "127.0.0.1",
+    "port": 5070,
+    "dialect": "sequelize"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "port": 5070,
+    "dialect": "sequelize"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "port": 5070,
+    "dialect": "sequelize"
+  }
+}
