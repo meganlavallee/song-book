@@ -37,7 +37,7 @@ const credentials = {
   clientSecret: client_secret,
   redirectUri: redirect_uri,
 };
-const scopes = ['playlist-modify-public', 'playlist-modify-private'];
+const scopes = ['playlist-modify-public', 'playlist-modify-private', 'playlist-read-collaborative', 'playlist-read-private'];
 
 const spotifyApi = new SpotifyWebApi(credentials);
 const authorizeURL = spotifyApi.createAuthorizeURL(scopes);
@@ -48,8 +48,10 @@ const setToken = async (req, res) => {
   try {
     const { body } = await spotifyApi.authorizationCodeGrant(req.query.code);
     spotifyApi.setAccessToken(body.access_token);
+    spotifyApi.setRefreshToken(body.refresh_token);
     res.render('new');
     getArtistId('Elvis');
+    generatePlaylistContainer('Testing 2', 'This is another test');
   } catch (err) {
     console.log('\noopsie!\n\n' + err);
   }
@@ -60,19 +62,30 @@ const getArtistId = async name => {
   console.log(data.body.artists.items.map(i => `${i.name} -- ${i.id}`));
 };
 
+const generatePlaylistContainer = async (title, description) => {
+  try {
+    spotifyApi.createPlaylist(title, { 'description': description, 'public': true })
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 app.listen(PORT, () =>
   console.log(
     `Listening on http://localhost:${PORT}. Go to /login to initiate authentication flow.`
   )
 );
 
-// playlist create method
-// app.get('/create', (req, res) => {
-//   spotifyApi
-//     .createPlaylist('Testing 2', { 'description': 'This is also a test', 'public': true })
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+//STILL NOT FUNCTIONAL
+// const renderPlaylist = async (userName) => {
+//   spotifyApi.getUserPlaylists(userName)
 //     .then(function (data) {
-//       console.log('Created playlist!');
+//       console.log('Retrieved playlists', data.body);
+//       // let readData = JSON.stringify(data);
+
 //     }, function (err) {
 //       console.log('Something went wrong!', err);
 //     });
-// })
+// }
