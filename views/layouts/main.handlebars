@@ -19,10 +19,9 @@
       $("#search-btn").click((e) => {
         e.preventDefault();
         const name = $('[name=artist_name]').val().trim();
-        $.ajax("/api/playlists", {
-          type: "POST",
-          data: { name },
-        }).then(() => location.reload());
+        $.ajax("/api/playlists/" + name, {
+          type: "GET",
+        }).then(data => console.log(data));
       });
     })
   </script>
