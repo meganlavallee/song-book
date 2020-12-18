@@ -37,11 +37,27 @@ const setToken = async (req, res) => {
 
 const getArtistId = async name => {
   const data = await spotifyApi.searchArtists(name);
-  console.log(data.body.artists.items[0].id);
+  return data.body.artists.items[0].id;
 };
 
-router.post('/api/playlists', (req, res) => {
-  getArtistId(req.body.name);
+const getReccs = async artistId => {
+  const data = await spotifyApi.getRecommendations({
+    min_energy: 0.7,
+    min_danceability: 0.7,
+    seed_artists: [artistId],
+    min_popularity: 50,
+  });
+  return data;
+};
+
+////////////////////////////////////////////////////////////////////
+// API ROUTES
+router.post('/api/playlists', async (req, res) => {
+  const id = await getArtistId(req.body.name);
+  const {
+    body: { tracks },
+  } = await getReccs(id);
+  console.log(tracks.map(track => track.name));
 });
 
 module.exports = router;
