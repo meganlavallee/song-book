@@ -24,12 +24,12 @@ app.set('view engine', 'handlebars');
 ////////////////////////////////////////////////////////////////////
 // HTML ROUTES
 app.get('/', (req, res) => res.render('index'));
-app.get('/callback', (req, res) => res.render('new'));
+app.get('/callback', (req, res) => setToken(req, res));
 
 ////////////////////////////////////////////////////////////////////
 // SPOTIFY API
-const client_id = '';
-const client_secret = '';
+const client_id = '42f8eb8e9e1c44fd9bac8098675676da';
+const client_secret = '690c3c6879944badb2f97b1cb09f0f7e';
 const redirect_uri =
   process.env.REDIRECT_URI || 'http://localhost:5070/callback';
 const credentials = {
@@ -43,6 +43,22 @@ const spotifyApi = new SpotifyWebApi(credentials);
 const authorizeURL = spotifyApi.createAuthorizeURL(scopes);
 console.log(authorizeURL);
 app.get('/login', (req, res) => res.redirect(authorizeURL));
+
+const setToken = async (req, res) => {
+  try {
+    const { body } = await spotifyApi.authorizationCodeGrant(req.query.code);
+    spotifyApi.setAccessToken(body.access_token);
+    res.render('new');
+    getArtistId('Elvis');
+  } catch (err) {
+    console.log('\noopsie!\n\n' + err);
+  }
+};
+
+const getArtistId = async name => {
+  const data = await spotifyApi.searchArtists(name);
+  console.log(data.body.artists.items.map(i => `${i.name} -- ${i.id}`));
+};
 
 app.listen(PORT, () =>
   console.log(
