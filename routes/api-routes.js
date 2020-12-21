@@ -1,59 +1,78 @@
-// Requiring Modles
+// Requiring Modules
 const db = require("../models");
 
 // Routes
 module.exports = function (app) {
-
-    // GET Route
-    app.get("/api/posts", function (req, res) {
-        const query = {};
-        if (req.query.song_id) {
-            query.otherID = req.query.otherID;
+    // Read Playlist
+    app.get("/api/playlists", async function (req, res) {
+        try {
+            // Add sequelize code to find all posts, and return them to the user with res.json
+            res.json(await db.Playlist.findAll());
+        } catch (err) {
+            res.status(500).end();
         }
-        // Join to Include All Routes
-        db.Post.findAll({
-            where: query,
-            include: [db.Author],
-        }).then(function (dbPost) {
-            res.json(dbPost);
-        });
     });
-};
 
-// GET Route for Single Song
-app.get("/api/posts/:id", function (req, res) {
-    //   Including Author
-    db.Post.findOne({
-        where: {
-            id: req.params.id,
-        },
-        include: [db.Author],
-    }).then(function (dbPost) {
-        console.log(dbPost);
-        res.json(dbPost);
-    });
-});
+    // Create Track
+    app.post("/api/playlists", async function (req, res) {
+        try {
+          await db.Playlist.create(req.body);
+          res.json({ msg: "Success!" });
+        } catch (err) {
+          res.status(500).end();
+        }
+      });
 
-// POST Route for Saving
-app.post("/api/posts", function (req, res) {
-    db.Post.create(req.body).then(function (dbPost) {
-        res.json(dbPost);
-    });
-});
+    //   Update Score
+    app.put("/api/playlists", async function (req, res) {
+        try {
+          await db.Playlist.update(req.body, { where: { id: req.body.id } });
+          res.json({ msg: "Score Updated!" });
+        } catch (err) {
+          res.status(500).end();
+        }
+      });
 
 
-// PUT Routes for Updating
-app.put("/api/posts", function (req, res) {
-    db.Post.update(req.body, {
-        where: {
-            id: req.body.id,
-        },
-    }).then(function (dbPost) {
-        res.json(dbPost);
-    });
-});
+//     // Route for Create Songs
+//     app.get("/api/models/songs", function (req, res) {
+//         db.Post.create(req.body).then(function (dbPost) {
+//             res.json(dbPost);
+//         })
+//     })
 
-// Route for Reading Songs
-// Route for Create Songs
-// Route for Inc
-// Route for Dec
+//     // POST Route for Saving
+//     app.post("/api/posts", function (req, res) {
+//         db.Post.create(req.body).then(function (dbPost) {
+//             res.json(dbPost);
+//         });
+//     });
+
+
+//     // PUT Routes for Updating
+//     app.put("/api/posts", function (req, res) {
+//         db.Post.update(req.body, {
+//             where: {
+//                 id: req.body.id,
+//             },
+//         }).then(function (dbPost) {
+//             res.json(dbPost);
+//         });
+//     });
+
+
+//     // Route for Inc
+//     const songs = await User.create({ name: "songs", age: 100 });
+//     const incrementResult = await songs.increment('age', { by: 2 });
+
+//     // Route for Dec
+//     const songs = await User.create({ name: "songs", age: 100, cash: 5000 });
+//     await songs.increment({
+//         'age': 2,
+//         'cash': 100
+//     });
+
+//     // If the values are incremented by the same amount, you can use this other syntax as well:
+//     await jane.increment(['age', 'cash'], { by: 2 });
+
+ }
