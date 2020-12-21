@@ -1,10 +1,10 @@
-// Requiring Modles
+// Requiring Modules
 const db = require("../models");
 
 // Routes
 module.exports = function (app) {
 
-    // GET Route
+    // Route for Reading Songs
     app.get("/api/posts", function (req, res) {
         const query = {};
         if (req.query.song_id) {
@@ -34,6 +34,13 @@ app.get("/api/posts/:id", function (req, res) {
     });
 });
 
+// Route for Create Songs
+app.get("/api/models/songs", function (req, res) {
+    db.Post.create(req.body).then(function (dbPost) {
+        res.json(dbPost);
+    })
+})
+
 // POST Route for Saving
 app.post("/api/posts", function (req, res) {
     db.Post.create(req.body).then(function (dbPost) {
@@ -53,7 +60,17 @@ app.put("/api/posts", function (req, res) {
     });
 });
 
-// Route for Reading Songs
-// Route for Create Songs
+
 // Route for Inc
+const songs = await User.create({ name: "songs", age: 100 });
+const incrementResult = await songs.increment('age', { by: 2 });
+
 // Route for Dec
+const songs = await User.create({ name: "songs", age: 100, cash: 5000 });
+await songs.increment({
+  'age': 2,
+  'cash': 100
+});
+
+// If the values are incremented by the same amount, you can use this other syntax as well:
+await jane.increment(['age', 'cash'], { by: 2 });
