@@ -88,11 +88,14 @@ const getArtistByAlbum = async albumId => {
 
 const generatePlaylistContainer = async (title, description) => {
   try {
-    spotifyApi.createPlaylist(title, { 'description': description, 'public': true })
+    spotifyApi.createPlaylist(title, {
+      description: description,
+      public: true,
+    });
   } catch (err) {
     console.error(err);
   }
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 //STILL NOT FUNCTIONAL
@@ -117,13 +120,14 @@ router.get('/api/playlists/:name', async (req, res) => {
   // console.log(artists);
   const idArr = artists.map(i => i.id);
   const newArr = [id, ...idArr.slice(0, 4)];
-  console.log(newArr);
+  // console.log(newArr);
   const { body } = await getRecommendations(newArr);
   const playlistInfo = await Promise.all(
     body.tracks.map(
       async i => `${i.name} -- ${await getArtistByAlbum(i.album.id)}`
     ) // <-----------
   );
+  console.log(playlistInfo);
   res.json(playlistInfo);
   // console.log(playlistInfo);
   // console.log(body.tracks.map(i => i.album));
