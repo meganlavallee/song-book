@@ -86,12 +86,22 @@ const getArtistByAlbum = async albumId => {
   }
 };
 
-const generatePlaylistContainer = async (title, description) => {
+const generatePlaylistContainer = async (title) => {
   try {
-    spotifyApi.createPlaylist(title, { 'description': description, 'public': true })
+    let generatedPlaylist = spotifyApi.createPlaylist(title, { 'description': 'Testing again', 'public': true });
+    return generatedPlaylist;
   } catch (err) {
     console.error(err);
   }
+}
+
+const addTracksToPlaylist = async (playlist, tracks) => {
+  spotifyApi.addTracksToPlaylist(playlist, [tracks])
+    .then(function (data) {
+      console.log('Added tracks to playlist!');
+    }, function (err) {
+      console.log('Something went wrong!', err);
+    });
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,16 +129,31 @@ router.get('/api/playlists/:name', async (req, res) => {
   const newArr = [id, ...idArr.slice(0, 4)];
   console.log(newArr);
   const { body } = await getRecommendations(newArr);
+  const playlistContainer = await generatePlaylistContainer('Testing 2');
+  const playlistID = playlistContainer.body.id;
   const playlistInfo = await Promise.all(
     body.tracks.map(
       async i => `${i.name} -- ${await getArtistByAlbum(i.album.id)}`
     ) // <-----------
   );
-  res.json(playlistInfo);
+  const tracksToPlaylist = await Promise.all(
+    body.tracks.map(
+      async i => `"spotify:track:${i.id},"`
+    ) // <-----------
+  );
+  // res.json(playlistInfo);
+  addTracksToPlaylist(playlistID, tracksToPlaylist);
   // console.log(playlistInfo);
   // console.log(body.tracks.map(i => i.album));
   // const { body } = await getAlbumInfo('64nbgEEIcY4g1ElVLONJ0w');
   // console.log(body.artists[0].name);
 });
+
+// app.createPlayList = function(songs) {
+// 	const baseUrl = 'https://embed.spotify.com/?theme=white&uri=spotify:trackset:My Playlist:';
+// 	songs = songs.map(song => song.id).join(',');
+
+// 	$('.playlist').append(`<iframe src="${baseUrl + songs}" height="400"></iframe>`);
+// }
 
 module.exports = router;
