@@ -96,7 +96,7 @@ const generatePlaylistContainer = async (title) => {
 }
 
 const addTracksToPlaylist = async (playlist, tracks) => {
-  spotifyApi.addTracksToPlaylist(playlist, [tracks])
+  spotifyApi.addTracksToPlaylist(playlist, tracks)
     .then(function (data) {
       console.log('Added tracks to playlist!');
     }, function (err) {
@@ -138,7 +138,7 @@ router.get('/api/playlists/:name', async (req, res) => {
   );
   const tracksToPlaylist = await Promise.all(
     body.tracks.map(
-      async i => `"spotify:track:${i.id},"`
+      async i => `spotify:track:${i.id}`
     ) // <-----------
   );
   // res.json(playlistInfo);
@@ -149,11 +149,5 @@ router.get('/api/playlists/:name', async (req, res) => {
   // console.log(body.artists[0].name);
 });
 
-// app.createPlayList = function(songs) {
-// 	const baseUrl = 'https://embed.spotify.com/?theme=white&uri=spotify:trackset:My Playlist:';
-// 	songs = songs.map(song => song.id).join(',');
-
-// 	$('.playlist').append(`<iframe src="${baseUrl + songs}" height="400"></iframe>`);
-// }
 
 module.exports = router;
