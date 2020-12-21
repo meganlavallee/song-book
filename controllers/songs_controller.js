@@ -86,15 +86,27 @@ const getArtistByAlbum = async albumId => {
   }
 };
 
-const generatePlaylistContainer = async (title, description) => {
+const generatePlaylistContainer = async title => {
   try {
-    spotifyApi.createPlaylist(title, {
-      description: description,
+    let generatedPlaylist = spotifyApi.createPlaylist(title, {
+      description: 'Testing again',
       public: true,
     });
+    return generatedPlaylist;
   } catch (err) {
     console.error(err);
   }
+};
+
+const addTracksToPlaylist = async (playlist, tracks) => {
+  spotifyApi.addTracksToPlaylist(playlist, tracks).then(
+    function (data) {
+      console.log('Added tracks to playlist!');
+    },
+    function (err) {
+      console.log('Something went wrong!', err);
+    }
+  );
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -122,12 +134,17 @@ router.get('/api/playlists/:name', async (req, res) => {
   const newArr = [id, ...idArr.slice(0, 4)];
   // console.log(newArr);
   const { body } = await getRecommendations(newArr);
+  const playlistContainer = await generatePlaylistContainer('Testing 2');
+  const playlistID = playlistContainer.body.id;
   const playlistInfo = await Promise.all(
     body.tracks.map(
       async i => `${i.name} -- ${await getArtistByAlbum(i.album.id)}`
     ) // <-----------
   );
-  console.log(playlistInfo);
+  const tracksToPlaylist = await Promise.all(
+    body.tracks.map(async i => `spotify:track:${i.id}`) // <-----------
+  );
+  // addTracksToPlaylist(playlistID, tracksToPlaylist);
   res.json(playlistInfo);
   // console.log(playlistInfo);
   // console.log(body.tracks.map(i => i.album));
