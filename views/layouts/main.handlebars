@@ -9,6 +9,8 @@
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script> --}}
   <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@thesephist/paper.css/dist/paper.min.css" />
+  <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
 <body>
@@ -21,8 +23,16 @@
         const name = $('[name=artist_name]').val().trim();
         $.ajax("/api/playlists/" + name, {
           type: "GET",
-        }).then(data => console.log(data));
+        }).then(data => {
+          $('#playlist-wrapper').empty();
+          data.forEach(i => $('#playlist-wrapper').append($('<p>').text(i).addClass('paper')));
+          $("#save-btn").show();
+        });
       });
+
+      $('#save-btn').click(e => {
+        e.preventDefault();
+      })
     })
   </script>
 </body>
