@@ -152,4 +152,9 @@ router.get('/api/playlists/:name', async (req, res) => {
   // console.log(body.artists[0].name);
 });
 
+router.post('/api/playlists', async (req, res) => {
+  console.log(req.body);
+  res.end();
+});
+
 module.exports = router;

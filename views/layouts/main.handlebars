@@ -26,12 +26,20 @@
         }).then(data => {
           $('#playlist-wrapper').empty();
           data.forEach(i => $('#playlist-wrapper').append($('<p>').text(i).addClass('paper')));
-          $("#save-btn").show();
+          $("#save-wrapper").show();
         });
       });
 
-      $('#save-btn').click(e => {
+      $('#save-btn').click((e) => {
         e.preventDefault();
+        const name = $('[name=playlist_name]').val().trim();
+        $.ajax("/api/playlists/", {
+          type: "POST",
+          data: { name }
+        }).then(data => {
+          console.log(data)
+          $('#save-wrapper').append($('<p>').text('Added playlist!'))
+        })
       })
     })
   </script>
