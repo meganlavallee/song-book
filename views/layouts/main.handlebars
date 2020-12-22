@@ -48,11 +48,11 @@
         const url = $('[name=playlist_name]').val().trim();
 
 
-        $('#save-wrapper').append($('<p>').text('Added playlist!'))
-        const burrito = $.ajax("/api/db/playlists", {
+        const addDBPlaylist = $.ajax("/api/db/playlists", {
           type: "POST",
           data: { title, url }
         })
+        $('#added-msg').show();
       })
     })
   </script>
