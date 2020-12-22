@@ -1,4 +1,4 @@
-module.exports = (sequelize, data) => {
+module.exports = (sequelize, DataTypes) => {
   const Playlist = sequelize.define("Playlist", {
     name: {
       type: DataTypes.STRING,
@@ -14,11 +14,15 @@ module.exports = (sequelize, data) => {
         len: [1],
       },
     },
-    score: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
+    imageURL: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1],
+      },
+    }
   });
+  return Playlist;
 };
 
 // selectAll(cb) {

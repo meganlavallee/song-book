@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require("../models");
 const router = express.Router();
 const SpotifyWebApi = require('spotify-web-api-node');
 const client_id = '42f8eb8e9e1c44fd9bac8098675676da';
@@ -109,6 +110,14 @@ const addTracksToPlaylist = async (playlist, tracks) => {
   );
 };
 
+const getImage = async (playlist) => {
+  const playlistImage = await fetch(`v1/playlists/${playlist}/images`, {
+    method: 'GET',
+    headers: {'Authorization' : 'Bearer' + token}
+  });
+  return playlistImage;
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 //STILL NOT FUNCTIONAL
 // const renderPlaylist = async (userName) => {
@@ -121,6 +130,16 @@ const addTracksToPlaylist = async (playlist, tracks) => {
 //       console.log('Something went wrong!', err);
 //     });
 // }
+
+
+router.post("/api/db/playlists", async function (req, res) {
+  try {
+    await db.Playlist.create(req.body);
+    res.json({ msg: "Success!" });
+  } catch (err) {
+    res.status(500).end();
+  }
+});
 
 ////////////////////////////////////////////////////////////////////
 // API ROUTES
@@ -160,7 +179,8 @@ router.post('/api/playlists', async (req, res) => {
   console.log(currentTracks);
   const tracksArr = currentTracks.tracks.map(i => `spotify:track:${i.id}`);
   const fullPlaylist = await addTracksToPlaylist(body.id, tracksArr);
-  res.end();
+  res.json(body);
 });
+
 
 module.exports = router;
