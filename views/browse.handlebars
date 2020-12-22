@@ -2,4 +2,8 @@
   <h1 class="new-header">View Playlists</h1>
 </header>
 <section id="existing-wrapper">
+  {{#each info}}
+  <p class="block fixed" style="display: flex;"><span>{{dataValues.title}}</span><a href="{{dataValues.url}}">View on
+      Spotify!</a></p>
+  {{/each}}
 </section>
