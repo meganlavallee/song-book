@@ -38,19 +38,19 @@
       $('#save-btn').click(async (e) => {
         e.preventDefault();
         const name = $('[name=playlist_name]').val().trim();
-        const response = $.ajax("/api/playlists/", {
+        $.ajax("/api/playlists/", {
           type: "POST",
           data: { name }
-        })
-        console.log(response);
+        }).then(response => {
+          console.log(response);
+          const url = response.external_urls.spotify;
+          const title = $('[name=playlist_name]').val().trim();
 
-        const title = $('[name=playlist_name]').val().trim();
-        const url = response.responseJSON.external_urls.spotify;
+          const addDBPlaylist = $.ajax("/api/db/playlists", {
+            type: "POST",
+            data: { title, url }
+          })
 
-
-        const addDBPlaylist = $.ajax("/api/db/playlists", {
-          type: "POST",
-          data: { title, url }
         })
         $('#added-msg').show();
       })
