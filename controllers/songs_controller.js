@@ -88,7 +88,7 @@ const getArtistByAlbum = async albumId => {
 
 const generatePlaylistContainer = async (title) => {
   try {
-    let generatedPlaylist = spotifyApi.createPlaylist(title, { 'description': 'Testing again', 'public': true });
+    let generatedPlaylist = spotifyApi.createPlaylist(title, { 'description': 'Playlist created using SongBook', 'public': true });
     return generatedPlaylist;
   } catch (err) {
     console.error(err);
@@ -129,7 +129,7 @@ router.get('/api/playlists/:name', async (req, res) => {
   const newArr = [id, ...idArr.slice(0, 4)];
   console.log(newArr);
   const { body } = await getRecommendations(newArr);
-  const playlistContainer = await generatePlaylistContainer('Testing 2');
+  const playlistContainer = await generatePlaylistContainer();
   const playlistID = playlistContainer.body.id;
   const playlistInfo = await Promise.all(
     body.tracks.map(
@@ -139,7 +139,7 @@ router.get('/api/playlists/:name', async (req, res) => {
   const tracksToPlaylist = await Promise.all(
     body.tracks.map(
       async i => `spotify:track:${i.id}`
-    ) // <-----------
+    )
   );
   // res.json(playlistInfo);
   addTracksToPlaylist(playlistID, tracksToPlaylist);
