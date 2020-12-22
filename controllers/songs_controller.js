@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const SpotifyWebApi = require('spotify-web-api-node');
 const client_id = '42f8eb8e9e1c44fd9bac8098675676da';
-const client_secret = '690c3c6879944badb2f97b1cb09f0f7e';
+const client_secret = 'af98ede233a141aba2d975272e95e49a';
 const redirect_uri =
   process.env.REDIRECT_URI || 'http://localhost:5070/callback';
 const credentials = {
