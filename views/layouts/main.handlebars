@@ -27,6 +27,7 @@
       $("#search-btn").click((e) => {
         e.preventDefault();
         $('#added-msg').hide();
+        $('[name=playlist_name]').val('');
         const name = $('[name=artist_name]').val().trim();
         $.ajax("/api/playlists/" + name, {
           type: "GET",
