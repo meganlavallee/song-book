@@ -89,7 +89,7 @@ const getArtistByAlbum = async albumId => {
 const generatePlaylistContainer = async title => {
   try {
     let generatedPlaylist = spotifyApi.createPlaylist(title, {
-      description: 'Testing again',
+      description: 'Playlist created using SongBook!',
       public: true,
     });
     return generatedPlaylist;
@@ -124,6 +124,8 @@ const addTracksToPlaylist = async (playlist, tracks) => {
 
 ////////////////////////////////////////////////////////////////////
 // API ROUTES
+let currentTracks = '';
+
 router.get('/api/playlists/:name', async (req, res) => {
   const id = await getArtistId(req.params.name);
   const {
@@ -134,16 +136,17 @@ router.get('/api/playlists/:name', async (req, res) => {
   const newArr = [id, ...idArr.slice(0, 4)];
   // console.log(newArr);
   const { body } = await getRecommendations(newArr);
-  const playlistContainer = await generatePlaylistContainer('Testing 2');
-  const playlistID = playlistContainer.body.id;
+  currentTracks = body;
+  // const playlistContainer = await generatePlaylistContainer('Testing 2');
+  // const playlistID = playlistContainer.body.id;
   const playlistInfo = await Promise.all(
     body.tracks.map(
       async i => `${i.name} -- ${await getArtistByAlbum(i.album.id)}`
     ) // <-----------
   );
-  const tracksToPlaylist = await Promise.all(
-    body.tracks.map(async i => `spotify:track:${i.id}`) // <-----------
-  );
+  // const tracksToPlaylist = await Promise.all(
+  //   body.tracks.map(async i => `spotify:track:${i.id}`) // <-----------
+  // );
   // addTracksToPlaylist(playlistID, tracksToPlaylist);
   res.json(playlistInfo);
   // console.log(playlistInfo);
@@ -153,7 +156,10 @@ router.get('/api/playlists/:name', async (req, res) => {
 });
 
 router.post('/api/playlists', async (req, res) => {
-  console.log(req.body);
+  const { body } = await generatePlaylistContainer(req.body.name);
+  console.log(currentTracks);
+  const tracksArr = currentTracks.tracks.map(i => `spotify:track:${i.id}`);
+  const fullPlaylist = await addTracksToPlaylist(body.id, tracksArr);
   res.end();
 });
 
