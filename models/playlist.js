@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const Playlist = sequelize.define("Playlist", {
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     imageURL: {
       type: DataTypes.STRING,
-      allowNull: false,
       validate: {
         len: [1],
       },
