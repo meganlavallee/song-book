@@ -38,7 +38,8 @@
           type: "POST",
           data: { name }
         })
-        $('#save-wrapper').append($('<p>').text('Added playlist!'))
+        //$('#save-wrapper').append($('<p>').text('Added playlist!').addClass('added-msg'))
+        $('#added-msg').show();
       })
     })
   </script>

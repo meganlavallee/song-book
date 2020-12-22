@@ -1,16 +1,23 @@
 <header>
-  <h1>New Playlist</h1>
+  <h1 class="new-header">New Playlist</h1>
 </header>
 <form action="#">
-  <p>
-    <label>Artist Name:</label><br>
-    <input type="text" name="artist_name">
-    <button id="search-btn">Search</button>
-  </p>
+  <div class="btn-wrapper">
+    <div class="block fixed wrapper">
+      <input type="text" name="artist_name" placeholder="Enter an artist/band...">
+    </div>
+    <button id="search-btn" class="block accent">Search</button>
+  </div>
+</form>
+{{!-- <div class="slidecontainer block fixed wrapper">
+  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+</div> --}}
+<form action="#" id="save-wrapper" style="display:none">
+  <div class="block fixed wrapper">
+    <input type="text" name="playlist_name" placeholder="Enter playlist name...">
+  </div>
+  <button id="save-btn" class="block">Save</button>
+  <p id="added-msg">added playlist!</p>
 </form>
 <section id="playlist-wrapper">
 </section>
-<form action="#" id="save-wrapper" style="display:none">
-  <input type="text" name="playlist_name" placeholder="Enter playlist name...">
-  <button id="save-btn">Save</button>
-</form>
