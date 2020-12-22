@@ -45,7 +45,7 @@
         console.log(response);
 
         const title = $('[name=playlist_name]').val().trim();
-        const url = $('[name=playlist_name]').val().trim();
+        const url = response.responseJSON.external_urls.spotify;
 
 
         const addDBPlaylist = $.ajax("/api/db/playlists", {
