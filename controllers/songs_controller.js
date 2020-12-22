@@ -1,9 +1,9 @@
 const express = require('express');
-const db = require("../models");
+const db = require('../models');
 const router = express.Router();
 const SpotifyWebApi = require('spotify-web-api-node');
 const client_id = '42f8eb8e9e1c44fd9bac8098675676da';
-const client_secret = 'af98ede233a141aba2d975272e95e49a';
+const client_secret = 'c472d0cc3b4a443c8aa3fb3371dd6297';
 const redirect_uri =
   process.env.REDIRECT_URI || 'http://localhost:5070/callback';
 const credentials = {
@@ -110,13 +110,13 @@ const addTracksToPlaylist = async (playlist, tracks) => {
   );
 };
 
-const getImage = async (playlist) => {
+const getImage = async playlist => {
   const playlistImage = await fetch(`v1/playlists/${playlist}/images`, {
     method: 'GET',
-    headers: {'Authorization' : 'Bearer' + token}
+    headers: { Authorization: 'Bearer' + token },
   });
   return playlistImage;
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 //STILL NOT FUNCTIONAL
@@ -131,11 +131,10 @@ const getImage = async (playlist) => {
 //     });
 // }
 
-
-router.post("/api/db/playlists", async function (req, res) {
+router.post('/api/db/playlists', async function (req, res) {
   try {
     await db.Playlist.create(req.body);
-    res.json({ msg: "Success!" });
+    res.json({ msg: 'Success!' });
   } catch (err) {
     res.status(500).end();
   }
@@ -181,6 +180,5 @@ router.post('/api/playlists', async (req, res) => {
   const fullPlaylist = await addTracksToPlaylist(body.id, tracksArr);
   res.json(body);
 });
-
 
 module.exports = router;
