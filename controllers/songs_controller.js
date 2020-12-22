@@ -16,6 +16,7 @@ const scopes = ['playlist-modify-public', 'playlist-modify-private'];
 ////////////////////////////////////////////////////////////////////
 // HTML ROUTES
 router.get('/', (req, res) => res.render('index'));
+router.get('/browse', (req, res) => res.render('browse'));
 router.get('/playlists', (req, res) => res.render('new'));
 router.get('/callback', (req, res) => setToken(req, res));
 
