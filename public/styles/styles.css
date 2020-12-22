@@ -1,0 +1,11 @@
+.btn-wrapper {
+  display: flex;
+}
+
+/* button:focus-visible {
+  position: initial;
+} */
+
+.block:active::after {
+  transform: none;
+}
