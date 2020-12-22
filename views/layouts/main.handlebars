@@ -9,7 +9,8 @@
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script> --}}
   <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css" />
-  <link rel="stylesheet" href="https://unpkg.com/@thesephist/paper.css/dist/paper.min.css" />
+  {{!-- <link rel="stylesheet" href="https://unpkg.com/@thesephist/paper.css/dist/paper.min.css" /> --}}
+  <link rel="stylesheet" href="https://unpkg.com/blocks.css/dist/blocks.min.css" />
   <link rel="stylesheet" href="/styles/styles.css">
 </head>
 
@@ -25,21 +26,19 @@
           type: "GET",
         }).then(data => {
           $('#playlist-wrapper').empty();
-          data.forEach(i => $('#playlist-wrapper').append($('<p>').text(i).addClass('paper')));
+          data.forEach(i => $('#playlist-wrapper').append($('<p>').text(i).addClass('block fixed')));
           $("#save-wrapper").show();
         });
       });
 
-      $('#save-btn').click((e) => {
+      $('#save-btn').click(async (e) => {
         e.preventDefault();
         const name = $('[name=playlist_name]').val().trim();
-        $.ajax("/api/playlists/", {
+        const data = await $.ajax("/api/playlists/", {
           type: "POST",
           data: { name }
-        }).then(data => {
-          console.log(data)
-          $('#save-wrapper').append($('<p>').text('Added playlist!'))
         })
+        $('#save-wrapper').append($('<p>').text('Added playlist!'))
       })
     })
   </script>
