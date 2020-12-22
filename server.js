@@ -5,7 +5,7 @@ const express = require('express');
 const request = require('request');
 const querystring = require('querystring');
 const exphbs = require('express-handlebars');
-const db = require('./models')
+const db = require('./models');
 
 const app = express();
 
@@ -24,15 +24,10 @@ app.use(routes);
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync().then(function () {
   app.listen(PORT, () =>
     console.log(
       `Listening on http://localhost:${PORT}. Go to /login to initiate authentication flow.`
     )
   );
 });
-
-
-
-
