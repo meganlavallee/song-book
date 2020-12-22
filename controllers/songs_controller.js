@@ -16,7 +16,16 @@ const scopes = ['playlist-modify-public', 'playlist-modify-private'];
 ////////////////////////////////////////////////////////////////////
 // HTML ROUTES
 router.get('/', (req, res) => res.render('index'));
-router.get('/browse', (req, res) => res.render('browse'));
+// router.get('/browse', (req, res) => res.render('browse'));
+router.get('/browse', async (req, res) => {
+  try {
+    const info = await db.Playlist.findAll();
+    res.render('browse', { info: info });
+    console.log(info);
+  } catch (err) {
+    res.status(500).end();
+  }
+});
 router.get('/playlists', (req, res) => res.render('new'));
 router.get('/callback', (req, res) => setToken(req, res));
 
@@ -132,7 +141,7 @@ const getImage = async playlist => {
 //     });
 // }
 
-router.post('/api/db/playlists', async function (req, res) {
+router.post('/api/db/playlists', async (req, res) => {
   try {
     await db.Playlist.create(req.body);
     res.json({ msg: 'Success!' });
