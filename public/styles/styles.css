@@ -45,6 +45,12 @@ header > h1 {
 .new-header {
   font-size: 3em;
 }
+
+#create-h1 {
+  position: relative;
+  right: 12px;
+}
+
 input {
   width: 300px;
 }
@@ -124,14 +130,29 @@ img {
   top: 80px;
 }
 
+#browse-link {
+  position: absolute;
+  font-size: small;
+  font-weight: 200;
+  right: 130px;
+  top: 80px;
+}
+
 .inline {
   height: 22px;
 }
 
 @media (max-width: 815px) {
-  #create-link {
+  #create-link,
+  #browse-link {
     position: relative;
     right: 0px;
     top: 0px;
   }
+}
+
+#lil-browse-btn,
+#lil-create-btn {
+  --block-accent-color: #c8e1ff;
+  color: black;
 }
