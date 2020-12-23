@@ -57,6 +57,7 @@ header > h1 {
 
 input {
   width: 300px;
+  background-color: white;
 }
 
 /* #msg-container {
