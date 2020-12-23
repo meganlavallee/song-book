@@ -29,9 +29,9 @@ router.get('/browse', async (req, res) => {
 router.get('/playlists', (req, res) => {
   spotifyApi.getMe().then(function (data) {
     let currentUser = data.body.display_name;
-    console.log(currentUser);
+    // console.log(currentUser);
     res.render('new', { currentUser });
-  })
+  });
 });
 router.get('/callback', (req, res) => setToken(req, res));
 
