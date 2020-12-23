@@ -124,7 +124,7 @@ img {
   align-items: center;
 }
 
-#create-link {
+/* #create-link {
   position: absolute;
   font-size: small;
   font-weight: 200;
@@ -138,6 +138,12 @@ img {
   font-weight: 200;
   right: 130px;
   top: 80px;
+} */
+
+#create-link,
+#browse-link {
+  font-size: small;
+  font-weight: 200;
 }
 
 .inline {
@@ -148,6 +154,8 @@ img {
 #lil-create-btn {
   --block-accent-color: #c8e1ff;
   color: black;
+  position: relative;
+  left: -20px;
 }
 
 #welcome-msg {
@@ -161,12 +169,12 @@ img {
     flex-direction: column;
     align-items: center;
   }
-  #create-link,
+  /* #create-link,
   #browse-link {
     position: relative;
     right: 0px;
     top: 0px;
-  }
+  } */
   #welcome-msg {
     transform: none;
     position: absolute;
