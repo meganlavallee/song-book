@@ -134,6 +134,15 @@ const getImage = async playlist => {
   return playlistImage;
 };
 
+const getUser = async () => {
+  try {
+    const data = await spotifyApi.getMe();
+    return data.body.display_name;
+  } catch (err) {
+    console.log('\noops! #7\n\n', err);
+  }
+};
+
 //////////////////////////////////////////////////////////////////////////////////////////////
 //STILL NOT FUNCTIONAL
 // const renderPlaylist = async (userName) => {
