@@ -13,10 +13,10 @@
 <div>
 
   <header class="intro-top">
-    <h1>SongBook</h1>
+    <h1>Spotifizenator<span id="nine-thou">9000</span></h1>
   </header>
   <main class="intro">
-    <p>An easy-to-use webapp to discover new music.<br>Create your own playlist or view others'.</p>
+    <p>An easy-to-use webapp to discover new music.<br>Create your own playlist or view others.</p>
     <div class="btn-wrapper">
       <button id="create-btn" class="block accent">Create</button>
       <button id="view-btn" class="block">View</button>
@@ -26,4 +26,8 @@
 <script>
   document.getElementById('create-btn').onclick = () =>
     (window.location.href = '/login');
+  document.getElementById('view-btn').onclick = () => {
+    (window.location.href = '/browse');
+    //fetch('/browse');
+  }
 </script>
