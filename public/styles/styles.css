@@ -5,6 +5,7 @@ body {
   background-color: #c8e1ff;
   --block-accent-color: #0366d6;
   font-family: 'Menlo', 'Monaco', monospace;
+  color: #24292e;
   position: relative;
 }
 
