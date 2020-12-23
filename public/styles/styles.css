@@ -6,6 +6,7 @@ body {
   --block-accent-color: #0366d6;
   font-family: 'Menlo', 'Monaco', monospace;
   color: #24292e;
+  --block-text-color: #24292e;
   position: relative;
 }
 
@@ -37,6 +38,7 @@ header > h1 {
   font-size: 4em;
   font-weight: bold;
   font-family: 'Raleway', sans-serif;
+  color: #24292e;
 }
 
 .intro {
