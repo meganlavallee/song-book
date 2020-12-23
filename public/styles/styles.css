@@ -90,3 +90,12 @@ input {
 #nine-thou {
   font-family: 'Rubik', sans-serif;
 }
+
+.row-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+a {
+  color: #0366d6;
+}
