@@ -1,5 +1,5 @@
 <header>
-  {{!-- <p>Welcome, {{currentUser}}!</p> --}}
+  <p id="welcome-msg">Welcome, {{currentUser}}!</p>
   <h1 class="new-header" id="create-h1">Create Playlist</h1>
   <p id="browse-link"><button id="lil-browse-btn" class="inline accent block">or browse some</button></p>
 </header>
@@ -25,6 +25,6 @@
 </section>
 
 <script>
-  document.getElementById('lil-create-btn').onclick = () =>
+  document.getElementById('lil-browse-btn').onclick = () =>
     (window.location.href = '/browse');
 </script>
