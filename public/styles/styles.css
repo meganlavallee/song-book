@@ -49,6 +49,7 @@ header > h1 {
 #create-h1 {
   position: relative;
   right: 12px;
+  margin-top: -12px;
 }
 
 input {
@@ -67,7 +68,8 @@ input {
   position: absolute;
   width: auto;
   transform: rotate(30deg);
-  left: 575px;
+  left: 625px;
+  /* bottom: 100px; */
   display: none;
 }
 /* 
@@ -155,4 +157,9 @@ img {
 #lil-create-btn {
   --block-accent-color: #c8e1ff;
   color: black;
+}
+
+#welcome-msg {
+  position: absolute;
+  transform: rotate(-35deg);
 }
