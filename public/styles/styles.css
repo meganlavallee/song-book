@@ -144,15 +144,6 @@ img {
   height: 22px;
 }
 
-@media (max-width: 815px) {
-  #create-link,
-  #browse-link {
-    position: relative;
-    right: 0px;
-    top: 0px;
-  }
-}
-
 #lil-browse-btn,
 #lil-create-btn {
   --block-accent-color: #c8e1ff;
@@ -162,4 +153,23 @@ img {
 #welcome-msg {
   position: absolute;
   transform: rotate(-35deg);
+}
+
+@media (max-width: 815px) {
+  #create-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #create-link,
+  #browse-link {
+    position: relative;
+    right: 0px;
+    top: 0px;
+  }
+  #welcome-msg {
+    transform: none;
+    position: absolute;
+    top: 50px;
+  }
 }
